@@ -1,4 +1,4 @@
-SELECT * FROM project.data ;
+select * from project.data;
 
 
 -- total episodes
@@ -48,12 +48,12 @@ select max(Equity_TakenP) from project.data ;
 
 --  startups having at total female count
 
-SELECT SUM(a.female_count) AS total_female_count
-FROM (
-  SELECT female, CASE WHEN female > 0 THEN 1 ELSE 0 END AS female_count
-  FROM project.data
+select sum(a.female_count) as total_female_count
+from  (
+  select female, case when  female > 0 then 1 else 0 end as female_count
+  from project.data
 ) a
-HAVING SUM(a.female_count) > 0 ;
+having sum(a.female_count) > 0 ;
 
 -- pitches converted having atleast ne women
 
@@ -118,9 +118,9 @@ on a.keyy=b.keyy) m
 
 inner join 
 
-(SELECT 'Ashneer' as keyy,SUM(C.ASHNEER_AMOUNT_INVESTED) total_amount_invested,
-AVG(C.ASHNEER_EQUITY_TAKENP) avg_equity_taken
-FROM (SELECT * FROM PROJECT.DATA  WHERE ASHNEER_EQUITY_TAKENP!=0 AND ASHNEER_EQUITY_TAKENP IS NOT NULL) C) n
+(select 'Ashneer' as keyy,sum(c.ashneer_amount_invested) total_amount_invested,
+avg(c.ashneer_equity_takenp) avg_equity_taken
+from  (select * from project.data  where ashneer_equity_takenp!=0 and ashneer_equity_takenp is not null) c) n
 
 on m.keyy=n.keyy ;
 
